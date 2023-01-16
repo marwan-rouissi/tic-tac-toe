@@ -42,14 +42,15 @@ def check_combinaison():
     elif Board[0][2] == Board[1][1] == Board[2][0] != '-':
         return True
     else:
-        False
+        return False
 
 def game():
     player = "X"
-    count = 1
-    while count < 9:
+    count = 0
+    while count<9:
     #while (check_availability()==True):
             #printBoard()
+            
         move_row = input("Au tour de "+player+" de selectionner la ligne à jouer: ")
         move_col = input("Au tour de "+player+" de selectionner la colonne à jouer: ")
         #if 1 > int(move_row) > 3:
@@ -58,19 +59,25 @@ def game():
         #if 1 > int(move_col) > 3:
          #   print("Entrez une valeur entre 1 et 3 !!!")
           #  continue
-        if check_combinaison()==True:
-            print(player+ " a gagné la partie.")
-            break
         if Board[int(move_row)-1][int(move_col)-1] != '-':
             print("Cette case est déjà jouée.")
             continue
+        if check_combinaison()==True:
+            print(player+ " a gagné la partie.")
+            break
         else:
             Board[int(move_row)-1][int(move_col)-1] = player
+            printBoard()
+        if check_combinaison()==True:
+            print(player+ " a gagné la partie.")
+            break
         if player == "X":
             player = "O"
         else:
             player = "X"
         count += 1
-        printBoard()
+        if count ==9:
+            print("Match nul.")
+        #printBoard()
         print(check_combinaison())
 game()
